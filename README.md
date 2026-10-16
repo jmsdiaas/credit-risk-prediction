@@ -121,3 +121,18 @@ Raw reproducibility artifacts: [`metrics.json`](reports/v2/metrics.json) and [`v
 
 ## License
 MIT
+
+
+## V3 — calibrated probability and uncertainty (experimental)
+
+V3 is ready to run; **no V3 performance metrics are claimed until it is executed**.
+It compares logistic regression and random forest with sigmoid/isotonic calibration.
+Calibration uses cross-validation inside the 60% fit pool, the 20% validation
+set selects the model and financial threshold, and the 20% test set is held out.
+
+Run locally: `python -m src.v3` (or use `notebooks/Credit_Risk_V3_Colab.ipynb` in Colab).
+Results will be written to `outputs_v3/`. Tests: `python -m pytest -q`.
+
+The reported stratified bootstrap intervals describe sampling uncertainty for
+**fixed** test predictions and threshold, not training/model-selection uncertainty.
+Costs are hypothetical and cannot establish real-world profitability or fairness.
