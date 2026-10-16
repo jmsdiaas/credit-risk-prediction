@@ -1,0 +1,130 @@
+{
+  "dataset": "UCI Statlog German Credit (id=144)",
+  "seed": 42,
+  "sample_counts": {
+    "fit_and_calibration": 600,
+    "validation": 200,
+    "test": 200
+  },
+  "calibration": "3-fold cross-validation within fit pool (no validation or test data)",
+  "selection": "lowest validation cost; tie-break Brier, then ROC-AUC; no test-driven selection",
+  "cost_assumptions_brl": {
+    "false_negative": 10000,
+    "false_positive": 1500
+  },
+  "validation_candidates": {
+    "logistic_regression__sigmoid": {
+      "threshold": 0.16,
+      "cost": 163500.0,
+      "tn": 51,
+      "fp": 89,
+      "fn": 3,
+      "tp": 57,
+      "roc_auc": 0.7198809523809524,
+      "average_precision": 0.5425182980671288,
+      "brier": 0.1858730052882816,
+      "log_loss": 0.5429950013887391,
+      "ece_10": 0.08656604978143394,
+      "cost_per_applicant": 817.5
+    },
+    "logistic_regression__isotonic": {
+      "threshold": 0.12,
+      "cost": 163500.0,
+      "tn": 51,
+      "fp": 89,
+      "fn": 3,
+      "tp": 57,
+      "roc_auc": 0.7218452380952382,
+      "average_precision": 0.5333850334490783,
+      "brier": 0.19138338528145735,
+      "log_loss": 0.7156816963655233,
+      "ece_10": 0.1023546073347106,
+      "cost_per_applicant": 817.5
+    },
+    "random_forest__sigmoid": {
+      "threshold": 0.17,
+      "cost": 147500.0,
+      "tn": 55,
+      "fp": 85,
+      "fn": 2,
+      "tp": 58,
+      "roc_auc": 0.7388095238095238,
+      "average_precision": 0.5482303623718088,
+      "brier": 0.17938100677852353,
+      "log_loss": 0.5281224984002603,
+      "ece_10": 0.07794400013182841,
+      "cost_per_applicant": 737.5
+    },
+    "random_forest__isotonic": {
+      "threshold": 0.16,
+      "cost": 150500.0,
+      "tn": 53,
+      "fp": 87,
+      "fn": 2,
+      "tp": 58,
+      "roc_auc": 0.731845238095238,
+      "average_precision": 0.5313013723872991,
+      "brier": 0.1817065787650004,
+      "log_loss": 0.5382517984528916,
+      "ece_10": 0.09951018185563033,
+      "cost_per_applicant": 752.5
+    }
+  },
+  "selected_model": "random_forest__sigmoid",
+  "selected_threshold": 0.17,
+  "test": {
+    "selected_threshold": {
+      "threshold": 0.17,
+      "cost": 182500.0,
+      "tn": 65,
+      "fp": 75,
+      "fn": 7,
+      "tp": 53,
+      "roc_auc": 0.7880952380952381,
+      "average_precision": 0.6047179514860113,
+      "brier": 0.1649142910621285,
+      "log_loss": 0.4977565364077651,
+      "ece_10": 0.05459991167838498,
+      "cost_per_applicant": 912.5
+    },
+    "threshold_0_5": {
+      "threshold": 0.5,
+      "cost": 335500.0,
+      "tn": 123,
+      "fp": 17,
+      "fn": 31,
+      "tp": 29,
+      "roc_auc": 0.7880952380952381,
+      "average_precision": 0.6047179514860113,
+      "brier": 0.1649142910621285,
+      "log_loss": 0.4977565364077651,
+      "ece_10": 0.05459991167838498,
+      "cost_per_applicant": 1677.5
+    },
+    "bootstrap_95_ci": {
+      "roc_auc": {
+        "lower_95": 0.7184136904761904,
+        "upper_95": 0.8546517857142857
+      },
+      "average_precision": {
+        "lower_95": 0.5106762880882922,
+        "upper_95": 0.7246879410846075
+      },
+      "brier": {
+        "lower_95": 0.1401968224130255,
+        "upper_95": 0.1876464353368463
+      },
+      "cost_per_applicant": {
+        "lower_95": 677.4375,
+        "upper_95": 1190.0625
+      }
+    },
+    "bootstrap_iterations": 1000
+  },
+  "limitations": [
+    "Small educational historical dataset; not production-ready",
+    "Bootstrap conditional on fixed trained model and threshold; does not capture training uncertainty",
+    "Cost figures hypothetical; no actual financial outcomes or fairness certification",
+    "Threshold optimized on validation; test evaluated once"
+  ]
+}
