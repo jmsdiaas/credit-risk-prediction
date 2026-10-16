@@ -51,6 +51,14 @@ tests/             # basic automated tests
 .github/workflows/ # CI
 ```
 
+## Portfolio v2 — leakage-aware comparison and cost-sensitive decisions
+
+Run `python -m src.advanced` after `pip install -r requirements.txt`. The v2 workflow uses **60% train / 20% validation / 20% held-out test**. It compares Logistic Regression, Random Forest and XGBoost (when installed), chooses the model and decision threshold **on validation only**, refits the selected model on train+validation and evaluates the test once. A lower threshold predicts more customers as bad. Hypothetical costs: R$10,000 per bad customer approved and R$1,500 per good customer rejected. These costs are illustrative, not actual financial losses.
+
+Artifacts in `outputs_v2/`: `metrics.json`, `model.joblib`, `confusion_matrix.png`, `roc_curve.png`, `precision_recall_curve.png`, `validation_cost_curve.png`, `validation_costs.csv`, `test_predictions.csv`, and `shap_summary.png` when SHAP succeeds. The notebook `notebooks/Credit_Risk_V2_Colab.ipynb` runs the project in Colab. **Upload the updated repository before running the notebook**, as it clones GitHub.
+
+The earlier R$177,000 estimate used a different training/evaluation procedure. **Do not compare it as a measured improvement** with v2 costs; compare v2 threshold 0.50 and v2 selected threshold on the same held-out test set. No production claims.
+
 ## Next milestones
 
 - Cross-validation and hyperparameter tuning
