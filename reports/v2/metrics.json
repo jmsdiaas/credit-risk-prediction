@@ -1,0 +1,88 @@
+{
+  "dataset": "UCI Statlog German Credit (id=144)",
+  "seed": 42,
+  "target": {
+    "0": "good",
+    "1": "bad"
+  },
+  "sample_counts": {
+    "train": 600,
+    "validation": 200,
+    "test": 200
+  },
+  "cost_assumptions_brl": {
+    "false_negative": 10000.0,
+    "false_positive": 1500.0
+  },
+  "selection_rule": "minimum validation cost, tie-break highest validation ROC-AUC",
+  "validation_models": {
+    "logistic_regression": {
+      "roc_auc": 0.7217857142857143,
+      "average_precision": 0.549241611629564,
+      "optimal_threshold": 0.21000000000000002,
+      "validation_cost": 159000.0
+    },
+    "random_forest": {
+      "roc_auc": 0.7452380952380953,
+      "average_precision": 0.5515489980845523,
+      "optimal_threshold": 0.27,
+      "validation_cost": 147500.0
+    },
+    "xgboost": {
+      "roc_auc": 0.7304761904761904,
+      "average_precision": 0.5389466236049026,
+      "optimal_threshold": 0.12,
+      "validation_cost": 149000.0
+    }
+  },
+  "selected_model": "random_forest",
+  "selected_threshold_from_validation": 0.27,
+  "test": {
+    "roc_auc": 0.7982142857142858,
+    "average_precision": 0.6420858221285455,
+    "threshold_0_5": {
+      "threshold": 0.5,
+      "cost": 293000.0,
+      "tn": 118,
+      "fp": 22,
+      "fn": 26,
+      "tp": 34
+    },
+    "selected_threshold": {
+      "threshold": 0.27,
+      "cost": 177500.0,
+      "tn": 55,
+      "fp": 85,
+      "fn": 5,
+      "tp": 55
+    },
+    "classification_report": {
+      "0": {
+        "precision": 0.9166666666666666,
+        "recall": 0.39285714285714285,
+        "f1-score": 0.55,
+        "support": 140.0
+      },
+      "1": {
+        "precision": 0.39285714285714285,
+        "recall": 0.9166666666666666,
+        "f1-score": 0.55,
+        "support": 60.0
+      },
+      "accuracy": 0.55,
+      "macro avg": {
+        "precision": 0.6547619047619048,
+        "recall": 0.6547619047619048,
+        "f1-score": 0.55,
+        "support": 200.0
+      },
+      "weighted avg": {
+        "precision": 0.7595238095238094,
+        "recall": 0.55,
+        "f1-score": 0.55,
+        "support": 200.0
+      }
+    }
+  },
+  "shap_status": "generated"
+}
