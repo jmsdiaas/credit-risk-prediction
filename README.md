@@ -123,16 +123,39 @@ Raw reproducibility artifacts: [`metrics.json`](reports/v2/metrics.json) and [`v
 MIT
 
 
-## V3 — calibrated probability and uncertainty (experimental)
+## V3 — Probability Calibration & Statistical Validation
 
-V3 is ready to run; **no V3 performance metrics are claimed until it is executed**.
-It compares logistic regression and random forest with sigmoid/isotonic calibration.
-Calibration uses cross-validation inside the 60% fit pool, the 20% validation
-set selects the model and financial threshold, and the 20% test set is held out.
+Version 3 has been successfully executed and evaluated
+using the public UCI German Credit dataset.
 
-Run locally: `python -m src.v3` (or use `notebooks/Credit_Risk_V3_Colab.ipynb` in Colab).
-Results will be written to `outputs_v3/`. Tests: `python -m pytest -q`.
+### Model performance
 
-The reported stratified bootstrap intervals describe sampling uncertainty for
-**fixed** test predictions and threshold, not training/model-selection uncertainty.
-Costs are hypothetical and cannot establish real-world profitability or fairness.
+- Selected model: Random Forest + Sigmoid Calibration
+- Decision threshold: 0.17
+- Test ROC-AUC: 0.7881
+- Test Average Precision: 0.6047
+- Default recall: 88.3%
+- Test observations: 200
+
+### Statistical validation
+
+- Stratified bootstrap with 1,000 resamples
+- ROC-AUC 95% CI: [0.7184, 0.8547]
+- Average Precision 95% CI: [0.5107, 0.7247]
+
+### Business impact simulation
+
+- Cost at threshold 0.50: BRL 335,500
+- Cost at selected threshold: BRL 182,500
+- Simulated cost reduction: 45.6%
+
+Costs are hypothetical and results are specific to
+the dataset and evaluation assumptions.
+
+### Reproducibility
+
+Run the V3 notebook in Google Colab or execute:
+
+    python -m src.v3
+
+The results are available in `outputs_v3/`.
